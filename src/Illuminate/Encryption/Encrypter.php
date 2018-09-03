@@ -3,8 +3,6 @@
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
-use Illuminate\Encryption\DecryptException;
-
 class Encrypter
 {
     /**
@@ -29,6 +27,7 @@ class Encrypter
      */
     public function __construct($key, $cipher = 'AES-128-CBC')
     {
+        $this->key = $key;
         $this->cipher = $cipher;
         if ( ! static::supported($this->key, $this->cipher)) {
             throw new \RuntimeException('The only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths.');
